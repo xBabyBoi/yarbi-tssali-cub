@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-qori <yel-qori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 14:01:46 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/01 11:36:20 by yel-qori         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:05:11 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,4 @@ void	calculate_next_position(t_game *game, t_player *player, int keysym)
 	get_direction(game, keysym, &dx, &dy);
 	normalize_vector(&dx, &dy);
 	try_move(game, player, dx, dy);
-}
-
-void	clear_window(t_game *game)
-{
-	mlx_clear_window(game->mlx, game->win);
 }

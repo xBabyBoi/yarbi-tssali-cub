@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*   map_parsing1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:44:08 by outourmi          #+#    #+#             */
-/*   Updated: 2025/11/20 01:01:45 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:18:39 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,46 +46,6 @@ int	is_empty_line(char *line)
 	return (1);
 }
 
-char	**extract_map(char **lines, int *map_start_idx)
-{
-	int		i;
-	int		j;
-	int		k;
-	int		count;
-	char	**map;
-
-	i = 0;
-	count = 0;
-	while (lines[i] && (is_identifier_line(lines[i])
-			|| is_empty_line(lines[i])))
-		i++;
-	if (map_start_idx)
-		*map_start_idx = i;
-	count = 0;
-	j = i;
-	while (lines[j])
-	{
-		if (!is_empty_line(lines[j]))
-			count++;
-		j++;
-	}
-	map = malloc((count + 1) * sizeof(char *));
-	if (!map)
-		return (NULL);
-	k = 0;
-	j = i;
-	while (lines[j])
-	{
-		if (!is_empty_line(lines[j]))
-		{
-			map[k++] = lines[j];
-		}
-		j++;
-	}
-	map[k] = NULL;
-	return (map);
-}
-
 void	check_map(char **map)
 {
 	int	i;
@@ -108,45 +68,6 @@ void	check_map(char **map)
 		i++;
 	}
 	if (count != 0)
-		exit(printf("invalid map\n"));
-}
-
-void	check_player(char **map, s_cub_info *info)
-{
-	int		i;
-	int		count;
-	char	c;
-	int		j;
-
-	i = 0;
-	count = 0;
-	if (!info->player)
-	{
-		info->player = malloc(sizeof(*info->player));
-		if (!info->player)
-			exit(printf("malloc failed\n"));
-	}
-	info->player->x = -1;
-	info->player->y = -1;
-	info->player->f = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j] && map[i][j] != '\n')
-		{
-			c = map[i][j];
-			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-			{
-				count++;
-				info->player->f = c;
-				info->player->y = i;
-				info->player->x = j;
-			}
-			j++;
-		}
-		i++;
-	}
-	if (count != 1)
 		exit(printf("invalid map\n"));
 }
 

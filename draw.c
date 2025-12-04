@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-qori <yel-qori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 10:47:42 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/11/21 18:14:19 by yel-qori         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:36:28 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,33 @@ void	draw_map(char **arena, int arena_size, t_game *game)
 	(void)arena_size;
 	mlx_clear_window(game->mlx, game->win);
 	raycast_3d(game);
+}
+
+void	put_pixel_to_frame(t_game *game, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+		return ;
+	dst = game->frame.addr + (y * game->frame.line_len + x * (game->frame.bpp
+				/ 8));
+	*(unsigned int *)dst = color;
+}
+
+int	select_texture_index(t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		if (ray->rayDirX < 0)
+			return (2);
+		else
+			return (3);
+	}
+	else
+	{
+		if (ray->rayDirY < 0)
+			return (0);
+		else
+			return (1);
+	}
 }
