@@ -56,8 +56,6 @@ int	flood_fill(char **map, int y, int x, int max_y)
 		return (0);
 	if (x >= get_line_length(map[y]) || !map[y][x] || map[y][x] == '\n')
 		return (0);
-	if (map[y][x] == ' ')
-		return (0);
 	if (map[y][x] == '1')
 		return (1);
 	if (map[y][x] == 'V')
@@ -97,4 +95,54 @@ int	validate_map_closure(s_cub_info *info)
 	if (!result)
 		return (0);
 	return (1);
+}
+
+void	replace_enclosed_spaces(char **map, char **copy, int h)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < h)
+	{
+		j = 0;
+		while (copy[i][j] && copy[i][j] != '\n')
+		{
+			if (copy[i][j] == 'V')
+				map[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
+}
+
+void	process_inside_spaces(char **map)
+{
+	int		h;
+	int		w;
+	int		i;
+	int		j;
+	char	**copy;
+
+	if (!map)
+		return ;
+	h = get_map_height(map);
+	w = get_map_width(map);
+	i = 0;
+	while (i < h)
+	{
+		j = 0;
+		while (map[i][j] && map[i][j] != '\n')
+		{
+			if (map[i][j] == ' ')
+			{
+				copy = duplicate_map(map, h, w);
+				if (flood_fill(copy, i, j, h))
+					replace_enclosed_spaces(map, copy, h);
+				free_map_copy(copy);
+			}
+			j++;
+		}
+		i++;
+	}
 }

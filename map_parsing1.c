@@ -80,6 +80,7 @@ int	map_parsing(s_cub_info *info)
 	map_only = extract_map(info->map, &map_start);
 	if (!map_only)
 		return (1);
+	process_inside_spaces(map_only);
 	check_map(map_only);
 	check_player(map_only, info);
 	info->map = map_only;

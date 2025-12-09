@@ -234,5 +234,8 @@ int					format_check(char *str, char *format);
 char				*ft_strcpy(char *dest, char *src);
 int					ft_strncmp(char *s1, char *s2, unsigned int n);
 char				*ft_strtrim(char *s1, char *set);
+void	process_inside_spaces(char **map);
+int		get_map_height(char **map);
+int		get_map_width(char **map);
 
 #endif
