@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:23:56 by outourmi          #+#    #+#             */
-/*   Updated: 2025/11/20 00:23:12 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/09 16:42:36 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	ft_end(char *s, char *set)
 	}
 	return (end);
 }
-
 
 char	*ft_strtrim(char *s1, char *set)
 {

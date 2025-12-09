@@ -37,9 +37,9 @@ static char	**extract_map2(char **lines, int start, int count)
 
 char	**extract_map(char **lines, int *map_start_idx)
 {
-	int		i;
-	int		j;
-	int		count;
+	int	i;
+	int	j;
+	int	count;
 
 	i = 0;
 	while (lines[i] && (is_identifier_line(lines[i])

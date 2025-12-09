@@ -53,27 +53,27 @@ char	*ft_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-int format_check(char *str,char *format)
+int	format_check(char *str, char *format)
 {
-    int i;
-    int x;
+	int	i;
+	int	x;
 
-    i = 0;
-    x = 0;
-    while(str[i])
-        i++;
-    i -= 4;
-    while(str[i])
-    {
-		if(str[i] == format[x])
-        {
+	i = 0;
+	x = 0;
+	while (str[i])
+		i++;
+	i -= 4;
+	while (str[i])
+	{
+		if (str[i] == format[x])
+		{
 			i++;
-            x++;
-        }
-        else
+			x++;
+		}
+		else
 			return (1);
-    }
-    return(0);
+	}
+	return (0);
 }
 
 int	ft_strncmp(char *s1, char *s2, unsigned int n)

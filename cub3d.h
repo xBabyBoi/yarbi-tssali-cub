@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 16:07:10 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/04 19:59:52 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/09 17:46:30 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,33 +145,32 @@ typedef struct s_cub_info
 
 typedef struct s_parse_color
 {
-	char	**color;
-	int		i;
-	int		j;
-	int		comp;
-	int		x;
-}	t_parse_color;
+	char			**color;
+	int				i;
+	int				j;
+	int				comp;
+	int				x;
+}					t_parse_color;
 
 typedef struct s_texture_count
 {
-	int	no;
-	int	so;
-	int	ea;
-	int	we;
-	int	f;
-	int	c;
-}	t_texture_count;
+	int				no;
+	int				so;
+	int				ea;
+	int				we;
+	int				f;
+	int				c;
+}					t_texture_count;
 
 typedef struct s_draw_params
 {
-	int	line_height;
-	int	draw_start;
-	int	draw_end;
-	int	tex_x;
-	double	step;
-	double	tex_pos;
-}   t_draw_params;
-
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	int				tex_x;
+	double			step;
+	double			tex_pos;
+}					t_draw_params;
 
 int					key_handler(int keysym, t_game *game);
 int					key_release_handler(int keysym, t_game *game);
@@ -197,30 +196,32 @@ void				draw_wall_stripe(t_game *game, int x, t_ray *ray);
 void				raycast_3d(t_game *game);
 int					load_textures(t_game *game, s_cub_info *info);
 void				set_player_direction(t_game *game, char direction);
-void				get_direction(t_game *game, int keysym, double *dx, double *dy);
+void				get_direction(t_game *game, int keysym, double *dx,
+						double *dy);
 void				normalize_vector(double *dx, double *dy);
-void	try_move(t_game *game, t_player *player, double dx, double dy);
-void	init_ray_dir_and_map(t_game *game, t_ray *ray, int x);
-void	init_delta_dist(t_ray *ray);
-void	init_step_x(t_game *game, t_ray *ray);
-void	transfer_parsed_data_to_game(t_game *game, s_cub_info *info);
-void	set_dir_plane_n(t_game *game, double plane_len);
-void	set_dir_plane_s(t_game *game, double plane_len);
-void	set_dir_plane_e(t_game *game, double plane_len);
-void	set_dir_plane_w(t_game *game, double plane_len);
+void				try_move(t_game *game, t_player *player, double dx,
+						double dy);
+void				init_ray_dir_and_map(t_game *game, t_ray *ray, int x);
+void				init_delta_dist(t_ray *ray);
+void				init_step_x(t_game *game, t_ray *ray);
+void				transfer_parsed_data_to_game(t_game *game,
+						s_cub_info *info);
+void				set_dir_plane_n(t_game *game, double plane_len);
+void				set_dir_plane_s(t_game *game, double plane_len);
+void				set_dir_plane_e(t_game *game, double plane_len);
+void				set_dir_plane_w(t_game *game, double plane_len);
 
-
-int	is_empty_line(char *line);
-int	is_identifier_line(char *line);
-int	validate_all_spaces_enclosed(char **map, int height);
-char	**duplicate_map(char **map, int height, int width);
-void	free_map_copy(char **map);
-void	parse_info(s_cub_info *info);
-int	get_line_length(char *line);
-char	**extract_map(char **lines, int *map_start_idx);
-void	check_player(char **map, s_cub_info *info);
-void	put_pixel_to_frame(t_game *game, int x, int y, int color);
-int	select_texture_index(t_ray *ray);
+int					is_empty_line(char *line);
+int					is_identifier_line(char *line);
+int					validate_all_spaces_enclosed(char **map, int height);
+char				**duplicate_map(char **map, int height, int width);
+void				free_map_copy(char **map);
+void				parse_info(s_cub_info *info);
+int					get_line_length(char *line);
+char				**extract_map(char **lines, int *map_start_idx);
+void				check_player(char **map, s_cub_info *info);
+void				put_pixel_to_frame(t_game *game, int x, int y, int color);
+int					select_texture_index(t_ray *ray);
 
 int					validate_map_closure(s_cub_info *info);
 int					parse_textures(s_cub_info *info);
@@ -234,8 +235,8 @@ int					format_check(char *str, char *format);
 char				*ft_strcpy(char *dest, char *src);
 int					ft_strncmp(char *s1, char *s2, unsigned int n);
 char				*ft_strtrim(char *s1, char *set);
-void	process_inside_spaces(char **map);
-int		get_map_height(char **map);
-int		get_map_width(char **map);
+void				process_inside_spaces(char **map);
+int					get_map_height(char **map);
+int					get_map_width(char **map);
 
 #endif

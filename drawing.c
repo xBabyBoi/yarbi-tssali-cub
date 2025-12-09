@@ -53,8 +53,7 @@ void	draw_floor(t_game *game, int x, int start_y)
 	}
 }
 
-void	draw_wall_pixels(t_game *game, t_img *texture, int x,
-		t_draw_params *p)
+void	draw_wall_pixels(t_game *game, t_img *texture, int x, t_draw_params *p)
 {
 	int	y;
 	int	tex_y;

@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 17:52:27 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/04 20:01:18 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/09 16:44:03 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ void	free_map_copy(char **map)
 
 int	count_lines(int fd)
 {
-    char	*line;
-    int		count;
+	char	*line;
+	int		count;
 
-    count = 0;
-    line = get_next_line(fd);
-    while (line)
-    {
-        count++;
-        free(line);
-        line = get_next_line(fd);
-    }
-    return (count);
+	count = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		count++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (count);
 }
 
 int	load_texture_index(t_game *game, const char *path, int idx,

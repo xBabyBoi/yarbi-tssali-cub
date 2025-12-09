@@ -50,8 +50,8 @@ int	map_info(s_cub_info *info)
 		process_line(info, info->map[i], &cnt);
 		i++;
 	}
-	if (cnt.no != 1 || cnt.so != 1 || cnt.we != 1
-		|| cnt.ea != 1 || cnt.f != 1 || cnt.c != 1)
+	if (cnt.no != 1 || cnt.so != 1 || cnt.we != 1 || cnt.ea != 1 || cnt.f != 1
+		|| cnt.c != 1)
 		exit(printf("Texture identifier error\n"));
 	parse_info(info);
 	return (0);
