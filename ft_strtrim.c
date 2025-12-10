@@ -6,11 +6,11 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 17:23:56 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/09 16:42:36 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:14:47 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 int	ft_start(char *s, char *set)
 {

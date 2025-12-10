@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 08:58:21 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/04 20:01:11 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/10 19:47:10 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_game(t_game *game)
 	game->keys.right = 0;
 }
 
-static int	load_map_from_file(const char *path, s_cub_info *info)
+static int	load_map_from_file(const char *path, t_cub_info *info)
 {
 	int		fd;
 	int		line_count;
@@ -58,7 +58,7 @@ static int	load_map_from_file(const char *path, s_cub_info *info)
 	return (0);
 }
 
-static int	parse_and_validate(s_cub_info *info)
+static int	parse_and_validate(t_cub_info *info)
 {
 	if (map_info(info) != 0)
 		return (printf("Error: Failed to parse map info\n"), 1);
@@ -72,13 +72,13 @@ static int	parse_and_validate(s_cub_info *info)
 int	main(int ac, char **av)
 {
 	t_game		game;
-	s_cub_info	*info;
+	t_cub_info	*info;
 
 	if (ac != 2)
 		return (printf("Usage: %s <map.cub>\n", av[0]), 1);
 	if (format_check(av[1], ".cub") == 1)
 		return (printf("Error: Invalid file format (expected .cub)\n"), 1);
-	info = malloc(sizeof(s_cub_info));
+	info = malloc(sizeof(t_cub_info));
 	if (!info)
 		return (printf("Error: Memory allocation failed\n"), 1);
 	if (load_map_from_file(av[1], info) != 0)

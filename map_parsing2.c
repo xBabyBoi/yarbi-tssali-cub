@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:44:08 by outourmi          #+#    #+#             */
-/*   Updated: 2025/11/21 18:23:29 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:04:30 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**extract_map(char **lines, int *map_start_idx)
 	return (extract_map2(lines, i, count));
 }
 
-int	scan_for_player(char **map, s_cub_info *info)
+int	scan_for_player(char **map, t_cub_info *info)
 {
 	int		i;
 	int		count;
@@ -87,7 +87,7 @@ int	scan_for_player(char **map, s_cub_info *info)
 	return (count);
 }
 
-void	check_player(char **map, s_cub_info *info)
+void	check_player(char **map, t_cub_info *info)
 {
 	int	count;
 

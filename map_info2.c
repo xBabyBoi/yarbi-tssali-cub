@@ -6,13 +6,13 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:44:01 by outourmi          #+#    #+#             */
-/*   Updated: 2025/11/21 18:35:33 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:04:19 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	process_line(s_cub_info *info, char *line, t_texture_count *cnt)
+static void	process_line(t_cub_info *info, char *line, t_texture_count *cnt)
 {
 	int	j;
 
@@ -33,7 +33,7 @@ static void	process_line(s_cub_info *info, char *line, t_texture_count *cnt)
 		info->ceiling_color = line;
 }
 
-int	map_info(s_cub_info *info)
+int	map_info(t_cub_info *info)
 {
 	t_texture_count	cnt;
 	int				i;

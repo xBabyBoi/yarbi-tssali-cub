@@ -6,11 +6,11 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 15:51:03 by outourmi          #+#    #+#             */
-/*   Updated: 2025/11/21 17:55:00 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:14:18 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 int	ft_atoi(char *str)
 {

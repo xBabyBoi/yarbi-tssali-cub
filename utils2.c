@@ -6,11 +6,11 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 17:52:27 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/09 16:44:03 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:14:22 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 void	clear_window(t_game *game)
 {
@@ -62,7 +62,7 @@ int	load_texture_index(t_game *game, const char *path, int idx,
 	return (0);
 }
 
-int	load_textures(t_game *game, s_cub_info *info)
+int	load_textures(t_game *game, t_cub_info *info)
 {
 	const char	*paths[4];
 	const char	*names[4];

@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 16:07:10 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/09 17:46:30 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:18:15 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,26 @@
 # include <string.h>
 # include <unistd.h>
 
-# ifndef XK_Escape
-#  define XK_Escape 0xff1b
-#  define XK_w 0x0077
-#  define XK_W 0x0057
-#  define XK_a 0x0061
-#  define XK_A 0x0041
-#  define XK_s 0x0073
-#  define XK_S 0x0053
-#  define XK_d 0x0064
-#  define XK_D 0x0044
-#  define XK_Left 0xff51
-#  define XK_Right 0xff53
+# ifndef XK_ESCAPE
+#  define XK_ESCAPE 0xff1b
+#  define XK_W_LOW 0x0077
+#  define XK_W_UPPER 0x0057
+#  define XK_A_LOW 0x0061
+#  define XK_A_UPPER 0x0041
+#  define XK_S_LOW 0x0073
+#  define XK_S_UPPER 0x0053
+#  define XK_D_LOW 0x0064
+#  define XK_D_UPPER 0x0044
+#  define XK_LEFT 0xff51
+#  define XK_RIGHT 0xff53
 # endif
 
 # define HEIGHT 600
 # define WIDTH 800
 # define FOV 60
 
-# ifndef tile_size
-#  define tile_size 32
+# ifndef TILE_SIZE
+#  define TILE_SIZE 32
 # endif
 
 typedef struct s_player
@@ -49,17 +49,17 @@ typedef struct s_player
 	float			px;
 	float			py;
 	int				position;
-	double			dirX;
-	double			dirY;
+	double			dir_x;
+	double			dir_y;
 	float			speed;
 }					t_player;
 
 typedef struct s_camera
 {
-	float			planeX;
-	float			planeY;
-	double			raydirX[WIDTH];
-	double			raydirY[WIDTH];
+	float			plane_x;
+	float			plane_y;
+	double			raydir_x[WIDTH];
+	double			raydir_y[WIDTH];
 }					t_camera;
 
 typedef struct s_keys
@@ -82,13 +82,13 @@ typedef struct s_map
 
 typedef struct s_img
 {
-	void *img;    // the mlx image
-	char *addr;   // pointer to pixel memory
-	int bpp;      // bits used for each pixel
-	int line_len; // numbers of bytes for one raw of pixels
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				line_len;
 	int				endian;
-	int width;  // texture width
-	int height; // texture height
+	int				width;
+	int				height;
 }					t_img;
 
 typedef struct s_game
@@ -97,41 +97,40 @@ typedef struct s_game
 	void			*win;
 	void			*image;
 	t_img			frame;
-	t_img textures[4]; // N S E W
+	t_img			textures[4];
 	t_player		player;
-	char **arena;   // Add arena storage
-	int arena_size; // Add arena size storage
+	char			**arena;
+	int				arena_size;
 	t_camera		camera;
-	t_keys keys; // Track key states
+	t_keys			keys;
 }					t_game;
 
 typedef struct s_ray
 {
-	double			rayDirX;
-	double			rayDirY;
-	int				mapX;
-	int				mapY;
-	double			sideDistX;
-	double			sideDistY;
-	double			deltaDistX;
-	double			deltaDistY;
-	double			perpWallDist;
-	int				stepX;
-	int				stepY;
+	double			raydir_x;
+	double			raydir_y;
+	int				map_x;
+	int				map_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			perp_wall_dist;
+	int				step_x;
+	int				step_y;
 	int				hit;
 	int				side;
-	double wallX; // exact x coordinate on the wall for texture mapping
+	double			wall_x;
 }					t_ray;
 
-// Parsing structures
-typedef struct s_playerinfo
+typedef struct t_playerinfo
 {
 	int				x;
 	int				y;
 	char			f;
-}					s_playerinfo;
+}					t_playerinfo;
 
-typedef struct s_cub_info
+typedef struct t_cub_info
 {
 	char			**map;
 	char			*north;
@@ -140,8 +139,8 @@ typedef struct s_cub_info
 	char			*west;
 	char			*floor_color;
 	char			*ceiling_color;
-	s_playerinfo	*player;
-}					s_cub_info;
+	t_playerinfo	*player;
+}					t_cub_info;
 
 typedef struct s_parse_color
 {
@@ -194,7 +193,7 @@ void				check_hit_wall(t_game *game, t_ray *ray);
 void				calculate_wall_distance(t_game *game, t_ray *ray);
 void				draw_wall_stripe(t_game *game, int x, t_ray *ray);
 void				raycast_3d(t_game *game);
-int					load_textures(t_game *game, s_cub_info *info);
+int					load_textures(t_game *game, t_cub_info *info);
 void				set_player_direction(t_game *game, char direction);
 void				get_direction(t_game *game, int keysym, double *dx,
 						double *dy);
@@ -205,7 +204,7 @@ void				init_ray_dir_and_map(t_game *game, t_ray *ray, int x);
 void				init_delta_dist(t_ray *ray);
 void				init_step_x(t_game *game, t_ray *ray);
 void				transfer_parsed_data_to_game(t_game *game,
-						s_cub_info *info);
+						t_cub_info *info);
 void				set_dir_plane_n(t_game *game, double plane_len);
 void				set_dir_plane_s(t_game *game, double plane_len);
 void				set_dir_plane_e(t_game *game, double plane_len);
@@ -216,26 +215,26 @@ int					is_identifier_line(char *line);
 int					validate_all_spaces_enclosed(char **map, int height);
 char				**duplicate_map(char **map, int height, int width);
 void				free_map_copy(char **map);
-void				parse_info(s_cub_info *info);
+void				parse_info(t_cub_info *info);
 int					get_line_length(char *line);
 char				**extract_map(char **lines, int *map_start_idx);
-void				check_player(char **map, s_cub_info *info);
+void				check_player(char **map, t_cub_info *info);
 void				put_pixel_to_frame(t_game *game, int x, int y, int color);
 int					select_texture_index(t_ray *ray);
 
-int					validate_map_closure(s_cub_info *info);
-int					parse_textures(s_cub_info *info);
+int					validate_map_closure(t_cub_info *info);
+int					parse_textures(t_cub_info *info);
 int					count_lines(int fd);
 int					ft_atoi(char *str);
-int					map_info(s_cub_info *info);
-int					map_parsing(s_cub_info *info);
+int					map_info(t_cub_info *info);
+int					map_parsing(t_cub_info *info);
 int					ft_strcmp(char *s1, char *s2);
 char				*ft_itoa(int n);
 int					format_check(char *str, char *format);
 char				*ft_strcpy(char *dest, char *src);
 int					ft_strncmp(char *s1, char *s2, unsigned int n);
 char				*ft_strtrim(char *s1, char *set);
-void				process_inside_spaces(char **map);
+void				process_inside_spaces(char **map, int h, int w);
 int					get_map_height(char **map);
 int					get_map_width(char **map);
 

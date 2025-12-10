@@ -1,0 +1,110 @@
+# valgrind-mlx.supp
+# Suppress common "reachable" and "possible" leaks from MiniLibX and system graphics libs.
+# Keeps user leaks visible while silencing framework noise.
+#
+# Usage:
+#   valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=valgrind-mlx.supp ./cub3D maps/test.cub
+
+{
+   X11_reachable_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libX11.so*
+}
+
+{
+   Xext_reachable_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libXext.so*
+}
+
+{
+   Xrender_reachable_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libXrender.so*
+}
+
+{
+   Xrandr_reachable_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libXrandr.so*
+}
+
+{
+   Xfixes_reachable_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libXfixes.so*
+}
+
+{
+   Xinerama_reachable_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libXinerama.so*
+}
+
+{
+   Xcursor_reachable_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libXcursor.so*
+}
+
+{
+   Xcb_chain_reachable_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libxcb.so*
+}
+
+{
+   Xau_chain_reachable_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libXau.so*
+}
+
+{
+   GLX_reachable_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libGLX*.so*
+}
+
+{
+   GL_reachable_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libGL.so*
+}
+
+{
+   MESA_or_driver_reachable_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libGLdispatch.so*
+}
+
+{
+   MiniLibX_linux_wrap
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*libmlx_Linux.so*
+}

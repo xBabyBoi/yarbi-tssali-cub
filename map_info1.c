@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:44:01 by outourmi          #+#    #+#             */
-/*   Updated: 2025/11/21 19:00:48 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:04:11 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*parse_color(char *str)
 	return (str1);
 }
 
-void	parse_info(s_cub_info *info)
+void	parse_info(t_cub_info *info)
 {
 	info->north = ft_strtrim(info->north, " \nNOSOWEAFC");
 	info->south = ft_strtrim(info->south, " \nNOSOWEAFC");

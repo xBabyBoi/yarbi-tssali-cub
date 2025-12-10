@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-qori <yel-qori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:05:49 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/01 11:33:40 by yel-qori         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:46:36 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,19 @@ void	calculate_wall_distance(t_game *game, t_ray *ray)
 	double	pos_x;
 	double	pos_y;
 
-	pos_x = game->player.px / tile_size;
-	pos_y = game->player.py / tile_size;
+	pos_x = game->player.px / TILE_SIZE;
+	pos_y = game->player.py / TILE_SIZE;
 	if (ray->side == 0)
-		ray->perpWallDist = (ray->mapX - pos_x + (1 - ray->stepX) / 2.0)
-			/ ray->rayDirX;
+		ray->perp_wall_dist = (ray->map_x - pos_x + (1 - ray->step_x) / 2.0)
+			/ ray->raydir_x;
 	else
-		ray->perpWallDist = (ray->mapY - pos_y + (1 - ray->stepY) / 2.0)
-			/ ray->rayDirY;
-	if (ray->perpWallDist < 1e-6)
-		ray->perpWallDist = 1e-6;
+		ray->perp_wall_dist = (ray->map_y - pos_y + (1 - ray->step_y) / 2.0)
+			/ ray->raydir_y;
+	if (ray->perp_wall_dist < 1e-6)
+		ray->perp_wall_dist = 1e-6;
 	if (ray->side == 0)
-		ray->wallX = pos_y + ray->perpWallDist * ray->rayDirY;
+		ray->wall_x = pos_y + ray->perp_wall_dist * ray->raydir_y;
 	else
-		ray->wallX = pos_x + ray->perpWallDist * ray->rayDirX;
-	ray->wallX -= floor(ray->wallX);
+		ray->wall_x = pos_x + ray->perp_wall_dist * ray->raydir_x;
+	ray->wall_x -= floor(ray->wall_x);
 }

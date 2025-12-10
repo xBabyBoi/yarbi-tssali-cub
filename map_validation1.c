@@ -6,31 +6,11 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:56:43 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/04 18:28:20 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:11:25 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	get_map_height(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
-}
-
-int	get_line_length(char *line)
-{
-	int	len;
-
-	len = 0;
-	while (line[len] && line[len] != '\n')
-		len++;
-	return (len);
-}
 
 int	get_map_width(char **map)
 {
@@ -72,7 +52,7 @@ int	flood_fill(char **map, int y, int x, int max_y)
 	return (1);
 }
 
-int	validate_map_closure(s_cub_info *info)
+int	validate_map_closure(t_cub_info *info)
 {
 	char	**map_copy;
 	int		height;
@@ -116,18 +96,14 @@ void	replace_enclosed_spaces(char **map, char **copy, int h)
 	}
 }
 
-void	process_inside_spaces(char **map)
+void	process_inside_spaces(char **map, int h, int w)
 {
-	int		h;
-	int		w;
 	int		i;
 	int		j;
 	char	**copy;
 
 	if (!map)
 		return ;
-	h = get_map_height(map);
-	w = get_map_width(map);
 	i = 0;
 	while (i < h)
 	{

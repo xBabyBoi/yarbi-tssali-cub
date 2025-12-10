@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   game_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-qori <yel-qori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:51:22 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/01 12:00:18 by yel-qori         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:03:59 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	set_player_position(t_game *game, s_cub_info *info)
+static void	set_player_position(t_game *game, t_cub_info *info)
 {
-	game->player.px = (info->player->x + 0.5f) * tile_size;
-	game->player.py = (info->player->y + 0.5f) * tile_size;
+	game->player.px = (info->player->x + 0.5f) * TILE_SIZE;
+	game->player.py = (info->player->y + 0.5f) * TILE_SIZE;
 }
 
-static void	set_player_direction_and_plane(t_game *game, s_cub_info *info,
+static void	set_player_direction_and_plane(t_game *game, t_cub_info *info,
 		double plane_len)
 {
 	if (info->player->f == 'N')
@@ -31,7 +31,7 @@ static void	set_player_direction_and_plane(t_game *game, s_cub_info *info,
 		set_dir_plane_w(game, plane_len);
 }
 
-static void	set_arena_and_size(t_game *game, s_cub_info *info)
+static void	set_arena_and_size(t_game *game, t_cub_info *info)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ static void	set_arena_and_size(t_game *game, s_cub_info *info)
 	game->arena_size = i;
 }
 
-void	transfer_parsed_data_to_game(t_game *game, s_cub_info *info)
+void	transfer_parsed_data_to_game(t_game *game, t_cub_info *info)
 {
 	const double	pi = 3.14159265358979323846;
 	double			plane_len;

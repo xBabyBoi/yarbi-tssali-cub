@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-qori <yel-qori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:21:00 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/01 11:45:18 by yel-qori         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:46:00 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static void	init_step_y(t_game *game, t_ray *ray)
 {
-	if (ray->rayDirY < 0)
+	if (ray->raydir_y < 0)
 	{
-		ray->stepY = -1;
-		ray->sideDistY = (game->player.py / tile_size - ray->mapY)
-			* ray->deltaDistY;
+		ray->step_y = -1;
+		ray->side_dist_y = (game->player.py / TILE_SIZE - ray->map_y)
+			* ray->delta_dist_y;
 	}
 	else
 	{
-		ray->stepY = 1;
-		ray->sideDistY = (ray->mapY + 1.0 - game->player.py / tile_size)
-			* ray->deltaDistY;
+		ray->step_y = 1;
+		ray->side_dist_y = (ray->map_y + 1.0 - game->player.py / TILE_SIZE)
+			* ray->delta_dist_y;
 	}
 }
 
@@ -43,23 +43,23 @@ void	check_hit_wall(t_game *game, t_ray *ray)
 	hit = 0;
 	while (hit == 0)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->side_dist_x < ray->side_dist_y)
 		{
-			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepX;
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
-			ray->mapY += ray->stepY;
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->mapX < 0 || ray->mapY < 0)
+		if (ray->map_x < 0 || ray->map_y < 0)
 			break ;
-		if (ray->mapY >= game->arena_size || !game->arena[ray->mapY])
+		if (ray->map_y >= game->arena_size || !game->arena[ray->map_y])
 			break ;
-		if (game->arena[ray->mapY][ray->mapX] == '1')
+		if (game->arena[ray->map_y][ray->map_x] == '1')
 			hit = 1;
 	}
 }

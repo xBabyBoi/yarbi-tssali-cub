@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 10:47:42 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/04 18:36:28 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/09 18:10:26 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	select_texture_index(t_ray *ray)
 {
 	if (ray->side == 0)
 	{
-		if (ray->rayDirX < 0)
+		if (ray->raydir_x < 0)
 			return (2);
 		else
 			return (3);
 	}
 	else
 	{
-		if (ray->rayDirY < 0)
+		if (ray->raydir_y < 0)
 			return (0);
 		else
 			return (1);

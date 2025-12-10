@@ -6,7 +6,7 @@
 #    By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/16 21:45:03 by yel-qori          #+#    #+#              #
-#    Updated: 2025/12/04 18:35:05 by outourmi         ###   ########.fr        #
+#    Updated: 2025/12/10 17:14:10 by outourmi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ SRC = main.c\
 	get_next_line/get_next_line.c\
 	keys_handler.c\
 	movements.c\
-	camera.c\
 	raycasting.c\
 	map_parsing1.c\
 	map_parsing2.c\
@@ -29,13 +28,13 @@ SRC = main.c\
 	map_validation2.c\
 	map_info1.c\
 	map_info2.c\
-	utils/utils1.c\
-	utils/utils2.c\
-	utils/ft_strtrim.c\
-	utils/ft_itoa.c\
+	utils1.c\
+	utils2.c\
+	utils3.c\
+	ft_strtrim.c\
+	ft_itoa.c\
 	init_rays.c\
 	drawing.c\
-	closing.c\
 	rays_utils.c\
 	player_movements.c\
 	game_data.c\

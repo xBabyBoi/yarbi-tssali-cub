@@ -6,11 +6,11 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 12:15:39 by outourmi          #+#    #+#             */
-/*   Updated: 2025/10/18 15:55:29 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:17:54 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 int	ft_intlen(int n)
 {

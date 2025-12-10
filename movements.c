@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 14:01:46 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/04 18:05:11 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/09 17:57:34 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	can_move_to(t_game *game, float px, float py)
 	int		row_w;
 	char	cell;
 
-	grid_x = (int)(px / tile_size);
-	grid_y = (int)(py / tile_size);
+	grid_x = (int)(px / TILE_SIZE);
+	grid_y = (int)(py / TILE_SIZE);
 	if (grid_y < 0 || grid_y >= game->arena_size)
 		return (0);
 	row_w = row_len_no_nl(game->arena[grid_y]);

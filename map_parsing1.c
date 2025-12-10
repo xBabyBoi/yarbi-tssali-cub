@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:44:08 by outourmi          #+#    #+#             */
-/*   Updated: 2025/11/21 18:18:39 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:10:14 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,20 @@ void	check_map(char **map)
 		exit(printf("invalid map\n"));
 }
 
-int	map_parsing(s_cub_info *info)
+int	map_parsing(t_cub_info *info)
 {
 	int		map_start;
 	char	**map_only;
+	int		h;
+	int		w;
 
 	map_start = 0;
 	map_only = extract_map(info->map, &map_start);
 	if (!map_only)
 		return (1);
-	process_inside_spaces(map_only);
+	h = get_map_height(map_only);
+	w = get_map_width(map_only);
+	process_inside_spaces(map_only, h, w);
 	check_map(map_only);
 	check_player(map_only, info);
 	info->map = map_only;

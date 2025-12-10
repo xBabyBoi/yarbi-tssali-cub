@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-qori <yel-qori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:43:29 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/01 11:45:42 by yel-qori         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:46:16 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,36 @@ void	init_ray_dir_and_map(t_game *game, t_ray *ray, int x)
 	double	camera_x;
 
 	camera_x = 2 * x / (double)WIDTH - 1;
-	ray->rayDirX = game->player.dirX + game->camera.planeX * camera_x;
-	ray->rayDirY = game->player.dirY + game->camera.planeY * camera_x;
-	ray->mapX = game->player.px / tile_size;
-	ray->mapY = game->player.py / tile_size;
+	ray->raydir_x = game->player.dir_x + game->camera.plane_x * camera_x;
+	ray->raydir_y = game->player.dir_y + game->camera.plane_y * camera_x;
+	ray->map_x = game->player.px / TILE_SIZE;
+	ray->map_y = game->player.py / TILE_SIZE;
 }
 
 void	init_delta_dist(t_ray *ray)
 {
-	if (ray->rayDirX == 0)
-		ray->deltaDistX = 1e30;
+	if (ray->raydir_x == 0)
+		ray->delta_dist_x = 1e30;
 	else
-		ray->deltaDistX = fabs(1 / ray->rayDirX);
-	if (ray->rayDirY == 0)
-		ray->deltaDistY = 1e30;
+		ray->delta_dist_x = fabs(1 / ray->raydir_x);
+	if (ray->raydir_y == 0)
+		ray->delta_dist_y = 1e30;
 	else
-		ray->deltaDistY = fabs(1 / ray->rayDirY);
+		ray->delta_dist_y = fabs(1 / ray->raydir_y);
 }
 
 void	init_step_x(t_game *game, t_ray *ray)
 {
-	if (ray->rayDirX < 0)
+	if (ray->raydir_x < 0)
 	{
-		ray->stepX = -1;
-		ray->sideDistX = (game->player.px / tile_size - ray->mapX)
-			* ray->deltaDistX;
+		ray->step_x = -1;
+		ray->side_dist_x = (game->player.px / TILE_SIZE - ray->map_x)
+			* ray->delta_dist_x;
 	}
 	else
 	{
-		ray->stepX = 1;
-		ray->sideDistX = (ray->mapX + 1.0 - game->player.px / tile_size)
-			* ray->deltaDistX;
+		ray->step_x = 1;
+		ray->side_dist_x = (ray->map_x + 1.0 - game->player.px / TILE_SIZE)
+			* ray->delta_dist_x;
 	}
 }
