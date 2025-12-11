@@ -103,7 +103,8 @@ typedef struct s_game
 	int				arena_size;
 	t_camera		camera;
 	t_keys			keys;
-}					t_game;
+	struct t_cub_info	*info;
+}                    t_game;
 
 typedef struct s_ray
 {
@@ -141,6 +142,9 @@ typedef struct t_cub_info
 	char			*ceiling_color;
 	t_playerinfo	*player;
 }					t_cub_info;
+/* Forward declaration to allow pointer usage in t_game */
+struct t_cub_info;
+
 
 typedef struct s_parse_color
 {
@@ -153,6 +157,7 @@ typedef struct s_parse_color
 
 typedef struct s_texture_count
 {
+	struct t_cub_info *info;
 	int				no;
 	int				so;
 	int				ea;
@@ -237,5 +242,11 @@ char				*ft_strtrim(char *s1, char *set);
 void				process_inside_spaces(char **map, int h, int w);
 int					get_map_height(char **map);
 int					get_map_width(char **map);
+
+// cleanup helpers
+void				free_map_array(char **map);
+void				free_info(struct t_cub_info *info);
+void				cleanup_game(t_game *game);
+void				free_initial_info(struct t_cub_info *info);
 
 #endif

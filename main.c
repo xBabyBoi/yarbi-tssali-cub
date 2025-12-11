@@ -19,6 +19,17 @@ void	init_game(t_game *game)
 	game->frame.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->frame.addr = mlx_get_data_addr(game->frame.img, &game->frame.bpp,
 			&game->frame.line_len, &game->frame.endian);
+	// Ensure textures array is initialized to avoid uninitialized reads
+	for (int i = 0; i < 4; i++)
+	{
+		game->textures[i].img = NULL;
+		game->textures[i].addr = NULL;
+		game->textures[i].bpp = 0;
+		game->textures[i].line_len = 0;
+		game->textures[i].endian = 0;
+		game->textures[i].width = 0;
+		game->textures[i].height = 0;
+	}
 	game->arena = NULL;
 	game->arena_size = 0;
 	game->player.speed = 0.3;
@@ -78,16 +89,27 @@ int	main(int ac, char **av)
 		return (printf("Usage: %s <map.cub>\n", av[0]), 1);
 	if (format_check(av[1], ".cub") == 1)
 		return (printf("Error: Invalid file format (expected .cub)\n"), 1);
-	info = malloc(sizeof(t_cub_info));
+	// Zero-initialize info to avoid reading uninitialized fields
+	info = calloc(1, sizeof(t_cub_info));
 	if (!info)
 		return (printf("Error: Memory allocation failed\n"), 1);
 	if (load_map_from_file(av[1], info) != 0)
+	{
+		free_initial_info(info);
 		return (1);
+	}
 	if (parse_and_validate(info) != 0)
+	{
+		free_info(info);
 		return (1);
+	}
 	init_game(&game);
+	game.info = info;
 	if (load_textures(&game, info) != 0)
+	{
+		cleanup_game(&game);
 		return (1);
+	}
 	transfer_parsed_data_to_game(&game, info);
 	draw_map(game.arena, game.arena_size, &game);
 	mlx_hook(game.win, 2, 1L << 0, key_handler, &game);

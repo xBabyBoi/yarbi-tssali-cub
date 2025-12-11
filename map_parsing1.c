@@ -77,9 +77,12 @@ int	map_parsing(t_cub_info *info)
 	char	**map_only;
 	int		h;
 	int		w;
+	char    **all_lines;
+	int     i;
 
 	map_start = 0;
-	map_only = extract_map(info->map, &map_start);
+	all_lines = info->map;
+	map_only = extract_map(all_lines, &map_start);
 	if (!map_only)
 		return (1);
 	h = get_map_height(map_only);
@@ -87,6 +90,16 @@ int	map_parsing(t_cub_info *info)
 	process_inside_spaces(map_only, h, w);
 	check_map(map_only);
 	check_player(map_only, info);
+	/* Free non-map lines (identifiers/empty) from the original lines */
+	i = 0;
+	while (all_lines[i])
+	{
+		if (is_identifier_line(all_lines[i]) || is_empty_line(all_lines[i]))
+			free(all_lines[i]);
+		i++;
+	}
+	/* Free the original array holder */
+	free(all_lines);
 	info->map = map_only;
 	return (0);
 }

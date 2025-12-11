@@ -66,6 +66,8 @@ char	*parse_color(char *str)
 	char			*str1;
 
 	p.color = malloc(3 * sizeof(char *));
+	if (!p.color)
+		return (NULL);
 	p.color[0] = malloc(4);
 	p.color[1] = malloc(4);
 	p.color[2] = malloc(4);
@@ -79,22 +81,39 @@ char	*parse_color(char *str)
 		p.i++;
 	}
 	if (p.x != 3)
+	{
+		free(p.color[0]);
+		free(p.color[1]);
+		free(p.color[2]);
+		free(p.color);
 		exit(printf("error"));
+	}
 	p.color[p.comp][p.j] = '\0';
 	str1 = rgb_to_hex(p.color[0], p.color[1], p.color[2]);
+	free(p.color[0]);
+	free(p.color[1]);
+	free(p.color[2]);
+	free(p.color);
 	return (str1);
 }
 
 void	parse_info(t_cub_info *info)
 {
+	char *tmp_floor;
+	char *tmp_ceiling;
+
 	info->north = ft_strtrim(info->north, " \nNOSOWEAFC");
 	info->south = ft_strtrim(info->south, " \nNOSOWEAFC");
 	info->west = ft_strtrim(info->west, " \nNOSOWEAFC");
 	info->east = ft_strtrim(info->east, " \nNOSOWEAFC");
-	info->floor_color = ft_strtrim(info->floor_color, " \nNOSOWEAFC");
-	info->ceiling_color = ft_strtrim(info->ceiling_color, " \nNOSOWEAFC");
-	info->floor_color = parse_color(info->floor_color);
-	info->ceiling_color = parse_color(info->ceiling_color);
+	tmp_floor = ft_strtrim(info->floor_color, " \nNOSOWEAFC");
+	tmp_ceiling = ft_strtrim(info->ceiling_color, " \nNOSOWEAFC");
+	info->floor_color = parse_color(tmp_floor);
+	info->ceiling_color = parse_color(tmp_ceiling);
+	if (tmp_floor)
+		free(tmp_floor);
+	if (tmp_ceiling)
+		free(tmp_ceiling);
 	if (format_check(info->north, ".xpm") == 1 || format_check(info->south,
 			".xpm") == 1 || format_check(info->west, ".xpm") == 1
 		|| format_check(info->east, ".xpm") == 1)
