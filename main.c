@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 08:58:21 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/12 17:51:30 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:35:47 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,30 +93,19 @@ int	main(int ac, char **av)
 	t_game		game;
 	t_cub_info	*info;
 
-	if (ac != 2)
-		return (printf("Usage: %s <map.cub>\n", av[0]), 1);
-	if (format_check(av[1], ".cub") == 1)
-		return (printf("Error: Invalid file format (expected .cub)\n"), 1);
+	if (ac != 2 || format_check(av[1], ".cub") == 1)
+		return (printf("Error"));
 	info = calloc(1, sizeof(t_cub_info));
 	if (!info)
 		return (printf("Error: Memory allocation failed\n"), 1);
 	if (load_map_from_file(av[1], info) != 0)
-	{
-		free_initial_info(info);
-		return (1);
-	}
+		return (free_initial_info(info));
 	if (parse_and_validate(info) != 0)
-	{
-		free_info(info);
-		return (1);
-	}
+		return (free_info(info));
 	init_game(&game);
 	game.info = info;
 	if (load_textures(&game, info) != 0)
-	{
-		cleanup_game(&game);
-		return (1);
-	}
+		return (cleanup_game(&game));
 	transfer_parsed_data_to_game(&game, info);
 	draw_map(game.arena, game.arena_size, &game);
 	mlx_hook(game.win, 2, 1L << 0, key_handler, &game);

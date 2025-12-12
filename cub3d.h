@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 16:07:10 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/12 17:32:32 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:26:02 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,8 +244,8 @@ int						get_map_width(char **map);
 // cleanup helpers
 void					free_texture_images(t_game *game);
 void					free_map_array(char **map);
-void					free_info(struct t_cub_info *info);
-void					cleanup_game(t_game *game);
-void					free_initial_info(struct t_cub_info *info);
+int						free_info(struct t_cub_info *info);
+int						cleanup_game(t_game *game);
+int						free_initial_info(struct t_cub_info *info);
 
 #endif

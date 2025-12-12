@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 17:17:23 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/12 17:17:53 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:26:44 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	free_map_array(char **map)
 	free(map);
 }
 
-void	free_info(t_cub_info *info)
+int	free_info(t_cub_info *info)
 {
 	if (!info)
-		return ;
+		return (2);
 	if (info->map)
 		free_map_array(info->map);
 	if (info->north)
@@ -48,12 +48,13 @@ void	free_info(t_cub_info *info)
 	if (info->player)
 		free(info->player);
 	free(info);
+	return (1);
 }
 
-void	cleanup_game(t_game *game)
+int	cleanup_game(t_game *game)
 {
 	if (!game)
-		return ;
+		return (2);
 	free_texture_images(game);
 	if (game->frame.img)
 		mlx_destroy_image(game->mlx, game->frame.img);
@@ -63,15 +64,17 @@ void	cleanup_game(t_game *game)
 		free_info(game->info);
 	if (game->mlx)
 		free(game->mlx);
+	return (1);
 }
 
-void	free_initial_info(t_cub_info *info)
+int	free_initial_info(t_cub_info *info)
 {
 	if (!info)
-		return ;
+		return (2);
 	if (info->map)
 		free_map_array(info->map);
 	if (info->player)
 		free(info->player);
 	free(info);
+	return (1);
 }
