@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:12:17 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/10 17:18:19 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/12 17:32:06 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int	close_handler(t_game *game)
 	exit(0);
 }
 
-static void	free_texture_images(t_game *game)
+void	free_texture_images(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 4)
@@ -67,70 +67,4 @@ static void	free_texture_images(t_game *game)
 			mlx_destroy_image(game->mlx, game->textures[i].img);
 		i++;
 	}
-}
-
-void	free_map_array(char **map)
-{
-	int i;
-
-	if (!map)
-		return;
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
-
-void	free_info(t_cub_info *info)
-{
-	if (!info)
-		return;
-	if (info->map)
-		free_map_array(info->map);
-	if (info->north)
-		free(info->north);
-	if (info->south)
-		free(info->south);
-	if (info->east)
-		free(info->east);
-	if (info->west)
-		free(info->west);
-	if (info->floor_color)
-		free(info->floor_color);
-	if (info->ceiling_color)
-		free(info->ceiling_color);
-	if (info->player)
-		free(info->player);
-	free(info);
-}
-
-void	cleanup_game(t_game *game)
-{
-	if (!game)
-		return;
-	/* Destroy MLX images (textures and frame). MLX internal leaks are suppressed separately */
-	free_texture_images(game);
-	if (game->frame.img)
-		mlx_destroy_image(game->mlx, game->frame.img);
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	/* Free parsed info and arena memory */
-	if (game->info)
-		free_info(game->info);
-}
-
-
-void	free_initial_info(t_cub_info *info)
-{
-	/* Free info when parsing hasn't transformed/aliased pointers yet */
-	if (!info)
-		return;
-	if (info->map)
-		free_map_array(info->map);
-	if (info->player)
-		free(info->player);
-	free(info);
 }

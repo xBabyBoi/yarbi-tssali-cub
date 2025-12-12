@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:44:08 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/10 17:10:14 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/12 17:34:27 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,22 +75,17 @@ int	map_parsing(t_cub_info *info)
 {
 	int		map_start;
 	char	**map_only;
-	int		h;
-	int		w;
-	char    **all_lines;
-	int     i;
+	char	**all_lines;
+	int		i;
 
 	map_start = 0;
 	all_lines = info->map;
 	map_only = extract_map(all_lines, &map_start);
 	if (!map_only)
 		return (1);
-	h = get_map_height(map_only);
-	w = get_map_width(map_only);
-	process_inside_spaces(map_only, h, w);
+	process_inside_spaces(map_only, 0, 0);
 	check_map(map_only);
 	check_player(map_only, info);
-	/* Free non-map lines (identifiers/empty) from the original lines */
 	i = 0;
 	while (all_lines[i])
 	{
@@ -98,7 +93,6 @@ int	map_parsing(t_cub_info *info)
 			free(all_lines[i]);
 		i++;
 	}
-	/* Free the original array holder */
 	free(all_lines);
 	info->map = map_only;
 	return (0);

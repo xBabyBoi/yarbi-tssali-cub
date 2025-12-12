@@ -6,7 +6,7 @@
 #    By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/16 21:45:03 by yel-qori          #+#    #+#              #
-#    Updated: 2025/12/10 17:14:10 by outourmi         ###   ########.fr        #
+#    Updated: 2025/12/12 17:17:58 by outourmi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC = main.c\
 	utils1.c\
 	utils2.c\
 	utils3.c\
+	utils4.c\
 	ft_strtrim.c\
 	ft_itoa.c\
 	init_rays.c\

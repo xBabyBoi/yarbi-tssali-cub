@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:44:01 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/10 17:04:11 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/12 17:51:19 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,25 @@ static void	process_color_char(char *str, t_parse_color *p)
 	}
 }
 
+char	*parse_color2(char *str1, t_parse_color p)
+{
+	if (p.x != 3)
+	{
+		free(p.color[0]);
+		free(p.color[1]);
+		free(p.color[2]);
+		free(p.color);
+		exit(printf("error"));
+	}
+	p.color[p.comp][p.j] = '\0';
+	str1 = rgb_to_hex(p.color[0], p.color[1], p.color[2]);
+	free(p.color[0]);
+	free(p.color[1]);
+	free(p.color[2]);
+	free(p.color);
+	return (str1);
+}
+
 char	*parse_color(char *str)
 {
 	t_parse_color	p;
@@ -80,27 +99,14 @@ char	*parse_color(char *str)
 		process_color_char(str, &p);
 		p.i++;
 	}
-	if (p.x != 3)
-	{
-		free(p.color[0]);
-		free(p.color[1]);
-		free(p.color[2]);
-		free(p.color);
-		exit(printf("error"));
-	}
-	p.color[p.comp][p.j] = '\0';
-	str1 = rgb_to_hex(p.color[0], p.color[1], p.color[2]);
-	free(p.color[0]);
-	free(p.color[1]);
-	free(p.color[2]);
-	free(p.color);
+	str1 = parse_color2(str, p);
 	return (str1);
 }
 
 void	parse_info(t_cub_info *info)
 {
-	char *tmp_floor;
-	char *tmp_ceiling;
+	char	*tmp_floor;
+	char	*tmp_ceiling;
 
 	info->north = ft_strtrim(info->north, " \nNOSOWEAFC");
 	info->south = ft_strtrim(info->south, " \nNOSOWEAFC");

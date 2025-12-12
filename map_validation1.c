@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:56:43 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/10 17:11:25 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/12 17:31:13 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	process_inside_spaces(char **map, int h, int w)
 	int		j;
 	char	**copy;
 
+	h = get_map_height(map);
+	w = get_map_width(map);
 	if (!map)
 		return ;
 	i = 0;
