@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 16:07:10 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/12 19:26:02 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/13 19:04:05 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ char					*ft_strcpy(char *dest, char *src);
 int						ft_strncmp(char *s1, char *s2, unsigned int n);
 char					*ft_strtrim(char *s1, char *set);
 void					process_inside_spaces(char **map, int h, int w);
+int						is_inside_space(char **map, int y, int x);
 int						get_map_height(char **map);
 int						get_map_width(char **map);
 

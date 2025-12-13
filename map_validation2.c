@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:56:43 by outourmi          #+#    #+#             */
-/*   Updated: 2025/11/21 18:09:05 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/13 19:04:05 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ int	is_valid_neighbor(char **map, int y, int x, int height)
 
 	if (y < 0 || y >= height)
 		return (0);
-	if (!map[y] || !map[y][x])
-		return (0);
 	line_len = get_line_length(map[y]);
-	if (x >= line_len)
+	if (x < 0 || x >= line_len || !map[y][x] || map[y][x] == '\n')
 		return (0);
 	if (map[y][x] == ' ')
 		return (0);

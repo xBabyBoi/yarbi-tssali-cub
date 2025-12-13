@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 18:00:32 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/10 16:46:30 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/13 20:15:21 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,38 @@ void	compute_draw_params(t_draw_params *p, t_img *texture, t_ray *ray)
 	p->tex_pos = (p->draw_start - HEIGHT / 2 + p->line_height / 2) * p->step;
 }
 
+int hexColorToInt(const char *hex)
+{
+    unsigned int result = 0;
+    int i = 0;
+    char c;
+
+    if (hex[0] == '0' && (hex[1] == 'x' || hex[1] == 'X'))
+        i = 2;
+
+    while (hex[i] != '\0')
+    {
+        c = hex[i];
+        result = result << 4;
+
+        if (c >= '0' && c <= '9')
+            result = result + (c - '0');
+        if (c >= 'a' && c <= 'f')
+            result = result + (c - 'a' + 10);
+        if (c >= 'A' && c <= 'F')
+            result = result + (c - 'A' + 10);
+        i++;
+    }
+    return result;
+}
+
 void	draw_ceiling(t_game *game, int x, int draw_start)
 {
 	int	y;
-
 	y = 0;
 	while (y < draw_start)
 	{
-		put_pixel_to_frame(game, x, y, 0x87CEEB);
+		put_pixel_to_frame(game, x, y, hexColorToInt(game->info->ceiling_color));
 		++y;
 	}
 }
@@ -44,11 +68,10 @@ void	draw_ceiling(t_game *game, int x, int draw_start)
 void	draw_floor(t_game *game, int x, int start_y)
 {
 	int	y;
-
 	y = start_y;
 	while (y < HEIGHT)
 	{
-		put_pixel_to_frame(game, x, y, 0x228B22);
+		put_pixel_to_frame(game, x, y, hexColorToInt(game->info->floor_color));
 		++y;
 	}
 }
@@ -62,7 +85,7 @@ void	draw_wall_pixels(t_game *game, t_img *texture, int x, t_draw_params *p)
 	y = p->draw_start;
 	while (y <= p->draw_end)
 	{
-		tex_y = (int)p->tex_pos & (texture->height - 1);
+		tex_y = (int)p->tex_pos;
 		p->tex_pos += p->step;
 		color = *(int *)(texture->addr + (tex_y * texture->line_len + p->tex_x
 					* (texture->bpp / 8)));

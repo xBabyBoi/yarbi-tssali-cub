@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:56:43 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/12 17:31:13 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/13 19:04:05 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,39 @@ void	replace_enclosed_spaces(char **map, char **copy, int h)
 	}
 }
 
+int	is_inside_space(char **map, int y, int x)
+{
+	int	line_len;
+	int	has_wall_left;
+	int	has_wall_right;
+	int	j;
+
+	line_len = get_line_length(map[y]);
+	has_wall_left = 0;
+	has_wall_right = 0;
+	j = 0;
+	while (j < x)
+	{
+		if (map[y][j] == '1' || map[y][j] == '0' || map[y][j] == 'N'
+			|| map[y][j] == 'S' || map[y][j] == 'E' || map[y][j] == 'W')
+			has_wall_left = 1;
+		j++;
+	}
+	j = x + 1;
+	while (j < line_len && map[y][j] != '\n')
+	{
+		if (map[y][j] == '1' || map[y][j] == '0' || map[y][j] == 'N'
+			|| map[y][j] == 'S' || map[y][j] == 'E' || map[y][j] == 'W')
+			has_wall_right = 1;
+		j++;
+	}
+	return (has_wall_left && has_wall_right);
+}
+
 void	process_inside_spaces(char **map, int h, int w)
 {
 	int		i;
 	int		j;
-	char	**copy;
 
 	h = get_map_height(map);
 	w = get_map_width(map);
@@ -112,13 +140,8 @@ void	process_inside_spaces(char **map, int h, int w)
 		j = 0;
 		while (map[i][j] && map[i][j] != '\n')
 		{
-			if (map[i][j] == ' ')
-			{
-				copy = duplicate_map(map, h, w);
-				if (flood_fill(copy, i, j, h))
-					replace_enclosed_spaces(map, copy, h);
-				free_map_copy(copy);
-			}
+			if (map[i][j] == ' ' && is_inside_space(map, i, j))
+				map[i][j] = '1';
 			j++;
 		}
 		i++;

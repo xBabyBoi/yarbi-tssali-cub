@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 10:47:42 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/09 18:10:26 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/13 18:38:51 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	draw_map(char **arena, int arena_size, t_game *game)
 {
 	(void)arena;
 	(void)arena_size;
-	mlx_clear_window(game->mlx, game->win);
 	raycast_3d(game);
 }
 
