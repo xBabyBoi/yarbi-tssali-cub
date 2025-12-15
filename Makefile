@@ -13,8 +13,9 @@
 
 NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I./minilibx-linux
-LDFLAGS = -L./minilibx-linux -lmlx -lX11 -lXext -lm
+CFLAGS = -Wall -Wextra -Werror
+# Use local prebuilt static lib if minilibx-linux dir is not present
+LDFLAGS = ./libmlx_Linux.a -lX11 -lXext -lm
 SRC = main.c\
 	draw.c\
 	get_next_line/get_next_line_utils.c\

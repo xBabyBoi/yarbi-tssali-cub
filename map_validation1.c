@@ -132,8 +132,7 @@ void	process_inside_spaces(char **map, int h, int w)
 
 	h = get_map_height(map);
 	w = get_map_width(map);
-	if (!map)
-		return ;
+	    (void)w;
 	i = 0;
 	while (i < h)
 	{
