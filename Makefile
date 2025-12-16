@@ -6,7 +6,7 @@
 #    By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/16 21:45:03 by yel-qori          #+#    #+#              #
-#    Updated: 2025/12/13 19:30:10 by outourmi         ###   ########.fr        #
+#    Updated: 2025/12/15 20:55:16 by outourmi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@
 NAME = cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-# Use local prebuilt static lib if minilibx-linux dir is not present
 LDFLAGS = ./libmlx_Linux.a -lX11 -lXext -lm
 SRC = main.c\
 	draw.c\

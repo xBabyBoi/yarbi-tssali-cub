@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:12:17 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/12 17:32:06 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/15 21:28:13 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ void	rotate_camera(t_game *game, double angle)
 		- game->camera.plane_y * sin(angle);
 	game->camera.plane_y = old_planex * sin(angle) + game->camera.plane_y
 		* cos(angle);
-}
-
-int	get_map_height(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
 }
 
 int	get_line_length(char *line)
@@ -67,4 +57,12 @@ void	free_texture_images(t_game *game)
 			mlx_destroy_image(game->mlx, game->textures[i].img);
 		i++;
 	}
+}
+
+void	free_color(t_parse_color p)
+{
+	free(p.color[0]);
+	free(p.color[1]);
+	free(p.color[2]);
+	free(p.color);
 }

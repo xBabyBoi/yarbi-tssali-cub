@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 16:07:10 by yel-qori          #+#    #+#             */
-/*   Updated: 2025/12/13 19:04:05 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/16 05:00:13 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,8 +241,8 @@ void					process_inside_spaces(char **map, int h, int w);
 int						is_inside_space(char **map, int y, int x);
 int						get_map_height(char **map);
 int						get_map_width(char **map);
-
-// cleanup helpers
+int						hex_to_int(char *hex);
+void					free_color(t_parse_color p);
 void					free_texture_images(t_game *game);
 void					free_map_array(char **map);
 int						free_info(struct t_cub_info *info);

@@ -6,7 +6,7 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:44:01 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/12 17:51:19 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/15 21:27:39 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,43 @@ char	*rgb_to_hex(char *r, char *g, char *b)
 	return (color);
 }
 
+void	free_color_exit(t_parse_color p)
+{
+	free(p.color[0]);
+	free(p.color[1]);
+	free(p.color[2]);
+	free(p.color);
+	exit(printf("error\n"));
+}
+
+void	parse_color_loop(char *str, t_parse_color *p)
+{
+	while (str[p->i] && p->comp < 3)
+	{
+		if (str[p->i] >= '0' && str[p->i] <= '9')
+		{
+			if (p->j < 5)
+				p->color[p->comp][p->j++] = str[p->i];
+			else
+				free_color_exit(*p);
+		}
+		else if (str[p->i] == ',')
+		{
+			if (p->j == 0)
+				free_color_exit(*p);
+			p->color[p->comp][p->j] = '\0';
+			p->comp++;
+			p->j = 0;
+		}
+		else if (str[p->i] == ' ' || str[p->i] == '\t')
+		{
+		}
+		else
+			free_color_exit(*p);
+		p->i++;
+	}
+}
+
 char	*parse_color(char *str)
 {
 	t_parse_color	p;
@@ -48,81 +85,23 @@ char	*parse_color(char *str)
 	p.color = malloc(3 * sizeof(char *));
 	if (!p.color)
 		return (NULL);
-	/* allocate slightly larger buffers to be safe (up to 4 digits + '\0') */
 	p.color[0] = malloc(6);
 	p.color[1] = malloc(6);
 	p.color[2] = malloc(6);
 	if (!p.color[0] || !p.color[1] || !p.color[2])
 	{
-		free(p.color[0]);
-		free(p.color[1]);
-		free(p.color[2]);
-		free(p.color);
+		free_color(p);
 		return (NULL);
 	}
 	p.i = 0;
 	p.j = 0;
 	p.comp = 0;
-	/* parse: accept digits, commas and whitespace; ignore whitespace between numbers */
-	while (str[p.i] && p.comp < 3)
-	{
-		if (str[p.i] >= '0' && str[p.i] <= '9')
-		{
-			if (p.j < 5)
-				p.color[p.comp][p.j++] = str[p.i];
-			else
-			{
-				/* number too long */
-				free(p.color[0]);
-				free(p.color[1]);
-				free(p.color[2]);
-				free(p.color);
-				exit(printf("error\n"));
-			}
-		}
-		else if (str[p.i] == ',')
-		{
-			if (p.j == 0)
-			{
-				/* empty component */
-				free(p.color[0]);
-				free(p.color[1]);
-				free(p.color[2]);
-				free(p.color);
-				exit(printf("error\n"));
-			}
-			p.color[p.comp][p.j] = '\0';
-			p.comp++;
-			p.j = 0;
-		}
-		else if (str[p.i] == ' ' || str[p.i] == '\t')
-		{
-			/* skip whitespace */
-		}
-		else
-		{
-			free(p.color[0]);
-			free(p.color[1]);
-			free(p.color[2]);
-			free(p.color);
-			exit(printf("error\n"));
-		}
-		p.i++;
-	}
+	parse_color_loop(str, &p);
 	if (p.comp != 2 || p.j == 0)
-	{
-		free(p.color[0]);
-		free(p.color[1]);
-		free(p.color[2]);
-		free(p.color);
-		exit(printf("error\n"));
-	}
+		free_color_exit(p);
 	p.color[p.comp][p.j] = '\0';
 	str1 = rgb_to_hex(p.color[0], p.color[1], p.color[2]);
-	free(p.color[0]);
-	free(p.color[1]);
-	free(p.color[2]);
-	free(p.color);
+	free_color(p);
 	return (str1);
 }
 

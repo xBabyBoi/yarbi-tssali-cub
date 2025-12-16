@@ -6,29 +6,11 @@
 /*   By: outourmi <outourmi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:56:43 by outourmi          #+#    #+#             */
-/*   Updated: 2025/12/13 19:04:05 by outourmi         ###   ########.fr       */
+/*   Updated: 2025/12/15 21:05:49 by outourmi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	get_map_width(char **map)
-{
-	int	i;
-	int	max_width;
-	int	current_width;
-
-	i = 0;
-	max_width = 0;
-	while (map[i])
-	{
-		current_width = get_line_length(map[i]);
-		if (current_width > max_width)
-			max_width = current_width;
-		i++;
-	}
-	return (max_width);
-}
 
 int	flood_fill(char **map, int y, int x, int max_y)
 {
@@ -132,7 +114,6 @@ void	process_inside_spaces(char **map, int h, int w)
 
 	h = get_map_height(map);
 	w = get_map_width(map);
-	    (void)w;
 	i = 0;
 	while (i < h)
 	{
